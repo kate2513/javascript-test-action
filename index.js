@@ -14,8 +14,8 @@ try {
   
   const pull_request_number = context.payload.pull_request_number;
   
-  const bot = new github.Github(github_token);
-  const comment = bot.issues.createComment({
+  const octokit = github.getOctokit(github_token);
+  const comment = octokit.issues.createComment({
 	  ...context.repo,
 	  issue_number: pull_request_number,
 	  body: message
