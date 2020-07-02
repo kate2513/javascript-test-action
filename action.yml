@@ -1,10 +1,13 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Add Comment To Pull Request'
+description: 'Adding comment to PR'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  message:  # comment
+    description: 'What to write'
     required: true
-    default: 'World'
+    default: 'Empty message'
+  GITHUB_TOKEN:
+    description: "Github token of repository"
+    required: true
 outputs:
   time: # id of output
     description: 'The time we we greeted you'

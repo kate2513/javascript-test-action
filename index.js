@@ -2,14 +2,25 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 try {
-  // `who-to-greet` input defined in action metadata file
-  const nameToGreet = core.getInput('who-to-greet');
-  console.log(`Hello ${nameToGreet}!`);
-  const time = (new Date()).toTimeString();
-  core.setOutput("time", time);
-  // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(github.context.payload, undefined, 2)
-  console.log(`The event payload: ${payload}`);
+  
+  const messageToSent = core.getInput('message');
+  const github_token = core.getInput('GITHUB_TOKEN');
+  const context = github.context;
+  
+  if (context.payload.pull_request == null){
+	  core.setFailed('No PR found!');
+	  return;
+  }
+  
+  const pull_request_number = context.payload.pull_request_number;
+  
+  const bot = new github.Github(github_token);
+  const comment = bot.issues.createComment({
+	  ...context.repo,
+	  issue_number: pull_request_number,
+	  body: message
+  });  
+
 } catch (error) {
   core.setFailed(error.message);
 }
