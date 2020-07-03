@@ -9,7 +9,7 @@ async function run() {
 	  const context = github.context;
 	  
 	  if (context.payload.pull_request == null){
-		  console.log(context.toString());
+		  console.log(context);
 		  core.setFailed('No PR found!');
 		  return;
 	  }
