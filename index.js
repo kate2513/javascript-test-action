@@ -8,11 +8,12 @@ async function run() {
 	  
 	  const context = github.context;
 	  
-/*	  if (context.payload.pull_request == null){
-		  core.setFailed('No PR found!');
+	  if (context.payload.pull_request == null){
+		  core.setFailed(context.toString());
+		  //core.setFailed('No PR found!');
 		  return;
 	  }
-*/	  
+	  
 	  const pull_request_number = context.payload.pull_request.number;
 	  
 	  const octokit = new github.GitHub(github_token);
