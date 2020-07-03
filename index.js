@@ -7,15 +7,18 @@ async function run() {
 	  const github_token = core.getInput('GITHUB_TOKEN');
 	  
 	  const context = github.context;
-	  console.log(context);
+	  //console.log(context);
+	  const pull_request_number = null;
 	  
-	  if (context.payload.pull_request == null){
+	  if (context.payload.pull_request != null){
+		  pull_request_number = context.payload.pull_request.number;
+	  } else if (context.payload.issue != null){
+		  pull_request_number = context.payload.issue.number;
+	  } else {
 		  core.setFailed('No PR found!');
 		  return;
 	  }
-	  
-	  const pull_request_number = context.payload.pull_request.number;
-	  
+	  	  
 	  const octokit = new github.GitHub(github_token);
 	  
 	  const comment = octokit.issues.createComment({
