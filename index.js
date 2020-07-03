@@ -7,9 +7,9 @@ async function run() {
 	  const github_token = core.getInput('GITHUB_TOKEN');
 	  
 	  const context = github.context;
+	  console.log(context);
 	  
 	  if (context.payload.pull_request == null){
-		  console.log(context);
 		  core.setFailed('No PR found!');
 		  return;
 	  }
