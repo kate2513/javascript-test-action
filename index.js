@@ -8,7 +8,7 @@ async function run() {
 	  
 	  const context = github.context;
 	  //console.log(context);
-	  const pull_request_number = null;
+	  let pull_request_number = null;
 	  
 	  if (context.payload.pull_request != null){
 		  pull_request_number = context.payload.pull_request.number;
