@@ -7,7 +7,7 @@ async function run() {
 	  const github_token = core.getInput('GITHUB_TOKEN');
 	  
 	  const context = github.context;
-	  console.log(context);
+	  //console.log(context);
 	  let pull_request_number = null;
 	  
 	  if (context.payload.pull_request != null){
